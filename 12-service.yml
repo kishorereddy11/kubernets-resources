@@ -1,0 +1,25 @@
+kind: Service
+apiVersion: v1
+metadata: 
+  name: myservice
+spec: 
+  selector:  # labels are used as selectors
+    project: expense
+    env: dev
+  ports:
+  - protocol: TCP
+    port: 80  #service port
+    targetPort: 80   #target container port //container 
+
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: backend
+  labels:
+    project: expense
+    env: dev
+spec:
+  containers:
+  - name: nginx
+    image: nginx

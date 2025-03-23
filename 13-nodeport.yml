@@ -1,0 +1,25 @@
+kind: Service
+apiVersion: v1
+metadata: 
+  name: nmynodeport
+spec:
+  type: NodePort
+  selector: 
+    project: expense
+    env: uat
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 90
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: backend-np
+  labels:
+    project: expense
+    env: uat
+spec:
+  containers:
+  - name: nginx
+    image: nginx

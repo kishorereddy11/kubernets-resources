@@ -1,0 +1,24 @@
+kind: ReplicaSet
+apiVersion: apps/v1
+metadata: 
+  name: replica-nginx
+  labels:
+    app: expense
+    tier: web
+spec: 
+  replicas: 3
+  selector:
+  #replicaset use these labels to find the pods for creating desired no. of replicas
+    matchLabels: 
+      tier: web
+      app: expense
+  #pod template     
+  template:
+    metadata:
+      labels:
+        tier: web
+        app: expense
+    spec: 
+      containers:
+      - name: nginx
+        image: nginx:stable-perl
